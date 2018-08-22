@@ -25,12 +25,15 @@ async function main() {
 async function save__wayback(href) {
 	const chromeCapabilities = webdriver.Capabilities.chrome()
 	chromeCapabilities.set('chromeOptions', { args: ['--headless'] })
-	const driver = new webdriver.Builder()
+	const builder = new webdriver.Builder()
 		.forBrowser('chrome')
 		.withCapabilities(chromeCapabilities)
+	const { PROXY_HTTP } = process.env
+	if (PROXY_HTTP) {
 		// proxy using polipo proxy which uses tor
-		.setProxy(proxy.manual({ http: '127.0.0.1:8123' }))
-		.build()
+		builder.setProxy(proxy.manual({ http: PROXY_HTTP }))
+	}
+	const driver = builder.build()
 	await driver.get(`https://web.archive.org/save/${href}`)
 	return
 }
