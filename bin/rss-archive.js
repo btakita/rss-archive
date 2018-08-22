@@ -6,7 +6,7 @@ const proxy = require('selenium-webdriver/proxy')
 const sleep = require('es6-sleep').promise
 main()
 async function main() {
-	const ARR__item = await _ARR__item()
+	const ARR__item = await _ARR__item(process.env.FEED_URL)
 	const ARR__promise = []
 	for (let i = 0; i < ARR__item.length; i++) {
 		const item = ARR__item[i]

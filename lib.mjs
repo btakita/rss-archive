@@ -1,8 +1,7 @@
 import fetch from 'node-fetch'
 import jsdom from 'jsdom'
 const { JSDOM } = jsdom
-export async function _ARR__item() {
-	const { FEED_URL } = process.env
+export async function _ARR__item(FEED_URL) {
 	const response = await fetch(FEED_URL)
 	const feed__xml = await response.text()
 	const dom = new JSDOM(feed__xml, {
